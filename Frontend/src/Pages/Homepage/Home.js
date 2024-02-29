@@ -48,8 +48,8 @@ export default function Home() {
       </section>
       {/* end of introductory section */}
 
-      {/* will add  turaround sheet feature section here*/}
-      
+      {/*turaround sheet feature section here*/}
+      {/* Will soon add more detailing in each of these sections*/}
       <section className='section1'>
         <div className='sec1-deccription-block'>
             <span><h1>Character Turnaround Sheets</h1></span>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </section>
     
-      {/* Adding Customization feature section */}
+      {/*Customization feature section */}
       <section className='section2'>
       <div className='sec2-deccription-block'>
             <span><h1>Customize Characters</h1></span>
@@ -76,7 +76,7 @@ export default function Home() {
             </span>
         </div>
       </section>
-       {/*will add  refinement feature section here*/}
+       {/*Refinement feature section */}
        <section className='section3'>
 
        <div className='sec3-deccription-block'>

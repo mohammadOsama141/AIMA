@@ -31,11 +31,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Frontend Setup
 
 - Navigate to the frontend directory and install dependencies:
-    - (`cd frontend`)
-    - (`npm install`)
+    - `cd frontend`
+    - `npm install`
 
 - Start the development server:
-    - (`npm start`)
+    - `npm start`
 
 The React app should now be running on (http://localhost:3000/)
 
@@ -43,17 +43,17 @@ The React app should now be running on (http://localhost:3000/)
 ### Backend Setup
 
 - Navigate to the backend directory and create a virtual environment:
-    - (`cd ../backend`)
-    - (`python -m venv venv`)
+    - `cd ../backend`
+    - `python -m venv venv`
 
 - Activate the virtual environment:
-    - On Windows: (`venv\Scripts\activate`)
+    - On Windows: `venv\Scripts\activate`
 
 - Install dependencies:
-    - (`pip install -r requirements.txt`)
+    - `pip install -r requirements.txt`
 
 - Start the FastAPI server:
-    - (`uvicorn main:app --reload`)
+    - `uvicorn main:app --reload`
 
 
 

@@ -48,10 +48,48 @@ export default function Home() {
       </section>
       {/* end of introductory section */}
 
+      {/* will add  turaround sheet feature section here*/}
       
-
-
+      <section className='section1'>
+        <div className='sec1-deccription-block'>
+            <span><h1>Character Turnaround Sheets</h1></span>
+            <span>Wrap up your long due character design with a few English words!
+                Generate detailed character turaround sheets based on your own text descriptions 
+                <br/>
+            <span>
+            <button type="button" class="btn-turnaround">Generate Turaround Sheets</button>
+            </span>           
+            </span>
+        </div>
+      </section>
     
+      {/* Adding Customization feature section */}
+      <section className='section2'>
+      <div className='sec2-deccription-block'>
+            <span><h1>Customize Characters</h1></span>
+            <span>Select specific areas of your character image for customization —
+                add, modify, or remove features as desired through a user-friendly brush tool.
+                <br/>
+            <span>
+            <button type="button" class="btn-customize">Customize Character</button>
+            </span>           
+            </span>
+        </div>
+      </section>
+       {/*will add  refinement feature section here*/}
+       <section className='section3'>
+
+       <div className='sec3-deccription-block'>
+            <span><h1>Refine Characters</h1></span>
+            <span>Make your character designs more visually appealing, Enhance the look and feel of your charcters with just a click!
+                <br/>
+            <span>
+            <button type="button" class="btn-refine">Refine Character</button>
+            </span>           
+            </span>
+        </div>
+      </section>
+  
     </div> {/* --> end of home div */}
     </>
   );

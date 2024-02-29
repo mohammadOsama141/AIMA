@@ -26,4 +26,5 @@ yarn-error.log*
 /Backend/venv
 
 # assets
-/Frontend/src/assets
+
+/Frontend/src/assets/images/

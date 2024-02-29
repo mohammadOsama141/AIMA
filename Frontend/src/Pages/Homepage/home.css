@@ -1,0 +1,89 @@
+/* Home.css */
+@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Fredericka+the+Great&family=Luckiest+Guy&display=swap');
+
+.home-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .intro-section {
+    justify-content: center;
+    text-align: center;
+    width: 800px;
+    display:inline-block;
+    align-items: center;
+    margin-top: 150px;
+  }
+  .badge-text{
+    border: 2px solid #ffffff; 
+    border-radius: 25px;  
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top:5px;
+    padding-bottom: 5px;
+  }
+  .intro-badge-container .intro-text {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    padding: 10px;
+    
+    margin-bottom: 20px;
+    background-color: black;
+    border-radius: 20px;
+    border-color: #ffffff;
+    border: 2px;
+  }
+
+  .home-heading {
+    margin: 20px 0;
+    font-size: 2.5rem;
+  }
+  
+  .intro-text {
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+  }
+  
+  .try-aima-action-button {
+    margin: 20px;
+    align-items:center;
+    display: inline-block;
+    background-color: rgb(246, 87, 13); 
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 1.25rem;
+  }
+  
+.try-aima-action-button .try-aima-btn-text{
+    font-family: "Afacad";
+}
+  
+  .sparkles-icon {
+    width: 24px; 
+    height: auto;
+    margin-right: 8px;
+    color: #ffffff; 
+  }
+
+  .demo-vdo-class {
+    width: 800px; /* Adjust width as needed */
+    height: 460px; 
+    border: 2px solid #ffffff; 
+    border-radius: 25px;  
+  }
+  .vdo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers vertically */
+    margin-top: 40px; 
+    margin-bottom: 40px;
+    
+   
+    
+  }

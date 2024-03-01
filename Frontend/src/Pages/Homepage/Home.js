@@ -1,8 +1,15 @@
 import React from 'react';
 import './Home.css';
 import slide_demo from '../../assets/images/aima-1s-vdo.mp4';
+import { useNavigate } from 'react-router-dom';
 //A1modelingassistant
 export default function Home() {
+  let navigate = useNavigate(); // Get the navigate function
+
+  const handleButtonClick = (path) => {
+    navigate(path); // Use navigate to change the route
+  };
+  
   return (
     <>
     {/* this "home-wrapper" div encapsulates the entire home page view */}
@@ -57,7 +64,7 @@ export default function Home() {
                 Generate detailed character turaround sheets based on your own text descriptions 
                 <br/>
             <span>
-            <button type="button" class="btn-turnaround">Generate Turaround Sheets</button>
+            <button type="button" className="btn-turnaround">Generate Turaround Sheets</button>
             </span>           
             </span>
         </div>
@@ -71,7 +78,9 @@ export default function Home() {
                 add, modify, or remove features as desired through a user-friendly brush tool.
                 <br/>
             <span>
-            <button type="button" class="btn-customize">Customize Character</button>
+            <button onClick={() => handleButtonClick('/draw-mask')} className="btn-customize">
+                Customize Character
+            </button>
             </span>           
             </span>
         </div>

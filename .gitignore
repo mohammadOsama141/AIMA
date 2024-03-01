@@ -25,6 +25,10 @@ yarn-error.log*
 # env
 /Backend/venv
 
-# assets
-
+# assets, (images etc)
 /Frontend/src/assets/images/
+/Backend/app/uploaded_images/
+/Backend/app/masked_images/
+
+#cache
+/Backend/app/__pycache__/

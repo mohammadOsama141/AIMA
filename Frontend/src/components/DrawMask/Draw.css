@@ -1,0 +1,72 @@
+/* Draw.css */
+
+.drawing-wrapper {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+  }
+  
+  .drawing-container {
+    margin-top: 200px ;
+    display: flex;
+    justify-content:space-evenly;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .image-container {
+    width: 30%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    border:2px solid white;
+    box-shadow: 0 0 15px 9px #eb710d;
+    border-radius: 10px;
+
+  }
+  .original-img{
+  
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .mask-img{
+  
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .image-container:not(:empty) {
+    border: none;
+  }
+  
+  .image-placeholder {
+    color: #aaa;
+    font-size: 20px;
+  }
+  
+  .mask-img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
+  
+  .tools-section {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #f5f5f5;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .tools-section button {
+    display: block;
+    margin-bottom: 10px;
+  }
+  

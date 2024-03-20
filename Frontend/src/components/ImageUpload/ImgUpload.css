@@ -1,62 +1,106 @@
-
-.file-container{
+/* ImageUpload.css */
+/*
+.image-upload-container {
     display: flex;
-    flex-direction: row;
-    justify-content: center ;
-    align-items: center;  
-    padding: 25px;
-    border-radius: 50px;
-    margin: 3% ;
-    box-shadow: 0 0 15px 9px #eb710d;
-    width: 25%;
-    height: 100px;
-    margin-left: 15.5%;
-   
-}
-.custom-file{
-    color: white;
-    background-color: black;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
-    border-radius: 20px;
-   
- 
-}
-.custom-file-label{
-    display: inline-block;
-    color: white;
-    background-color: black;
-    border: 2px solid  #eb710d;
+    border-radius: 10px;
+    margin: 2% auto;
+    border: 2px solid #ed9954;
+    background-color: #f9f9f9;
+    width: 80%;
+    max-width: 500px;
+  }
+  
+  .image-upload-input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .image-upload-input {
+    opacity: 0;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2; 
+  }
+  
+  .image-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #eb710d;
     border-radius: 20px;
     cursor: pointer;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1; 
+  }
+  
+  .image-upload-button {
+    color: #fff;
+    background-color: #eb710d;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .image-upload-button:hover {
+    background-color: #ca6410;
+  }
+  
 
-}
-.custom-file-input {
-    opacity: 0; 
-    width: 0.1px;
-    height: 0.1px; /* Minimize the input's size */
-    position: absolute; /* Take it out of the flow */
-    z-index: -1; /* Place it behind the label */
-}
-.custom-file-input:focus + .custom-file-label {
+  .image-upload-input:focus + .image-upload-label,
+  .image-upload-input:active + .image-upload-label {
     border-color: #ff750b;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-.file-container button{
-    color: white;
-    padding: 10px 10px;
-    border-radius: 20px;
-    margin: 10px;
-    border: 2px solid  #eb710d;
-   
-}
-.file-container button:hover{
-    background-color: rgb(24, 24, 24);
-    color: rgb(255, 255, 255);
-}
-.custom-file-input:lang(en):active + .custom-file-label::after {
-    content: "Choose file";
+    box-shadow: 0 0 0 0.2rem rgba(255, 117, 11, 0.25);
+  }
+  
+
+  .image-upload-input:lang(en):active + .image-upload-label::after,
+  .image-upload-input:lang(en):checked + .image-upload-label::after {
+    content: "Change";
+  }
+  */
+  /* src/components/ImageUpload/ImgUpload.css */
+.file-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    border: 2px dashed #007bff;
+    border-radius: 5px;
 }
 
-.custom-file-input:lang(en):checked + .custom-file-label::after {
-    content: "Change";
+.custom-file-input {
+    margin: 10px 0;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
 }

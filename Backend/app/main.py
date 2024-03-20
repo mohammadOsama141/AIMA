@@ -8,6 +8,7 @@ import cv2
 from PIL import Image
 import shutil
 from pathlib import Path
+from datetime import datetime
 
 app = FastAPI()
 
@@ -49,6 +50,7 @@ async def upload_image(image: UploadFile = File(...)):
 async def draw_mask(request: DrawRequest):
     # Load the specific uploaded image
     file_path = UPLOAD_DIR / request.filename
+    print("file name: ", file_path, "\n")
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="Image not found")
 
@@ -82,10 +84,14 @@ async def draw_mask(request: DrawRequest):
     # Optionally, save the mask image
     mask_path = PROCESS_DIR / f"mask_{request.filename}"
     cv2.imwrite(str(mask_path), mask_dilated * 255)  # Save mask as a b&w image
+    print("backed path:",  f"/masked_images/{result_path.name}")
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S%f')
 
     return JSONResponse(content={
-        'image_path': str(result_path), 'mask_path': str(mask_path)
-        })
+        'image_path': f"/masked_images/{result_path.name}?{timestamp}",
+        'mask_path': f"/masked_images/{mask_path.name}?{timestamp}"
+    })
+
 
 if __name__ == "__main__":
     import uvicorn

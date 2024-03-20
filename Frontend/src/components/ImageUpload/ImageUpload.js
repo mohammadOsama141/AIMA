@@ -14,7 +14,6 @@ const ImageUpload = ({ onUploadSuccess }) => { // Accept a callback prop
             setFileName(file.name); // Update the file name in state
         }
     };
-
     const handleUpload = async () => {
         if (!selectedFile) {
             alert('Please select a file first!');
@@ -31,8 +30,7 @@ const ImageUpload = ({ onUploadSuccess }) => { // Accept a callback prop
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
             alert('Upload successful');
-            // Assuming the response contains the URL/path of the uploaded image
-            onUploadSuccess(response.data.url); // Invoke the callback with the image URL
+            onUploadSuccess(response.data.url);
         } catch (error) {
             console.error('Upload error:', error);
             alert('Upload failed');

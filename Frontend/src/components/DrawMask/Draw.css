@@ -1,17 +1,27 @@
 /* Draw.css */
-
+/*
 .drawing-wrapper {
+    margin-top: 150px ;
+    margin-bottom: 50px ;
     display: flex;
     flex-direction: column; 
-    width: 100%;
+    max-width: 100%;
+    border: 1px solid wheat;
+    border-radius: 30px;
+    height: 650px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: rgb(0, 0, 0);
+
   }
   
   .drawing-container {
-    margin-top: 200px ;
+    margin-top:50px ;
     display: flex;
     justify-content:space-evenly;
-    width: 100%;
+    max-width: 100%;
     align-items: center;
+
   }
   
   .image-container {
@@ -22,19 +32,18 @@
     align-items: center;
     text-align: center;
     position: relative;
-    border:2px solid white;
-    box-shadow: 0 0 15px 9px #eb710d;
+   
+    box-shadow: 0 0 15px 9px rgb(255, 100, 3);
     border-radius: 10px;
+    background-color: rgb(19, 18, 18);
 
   }
   .original-img{
-  
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
   }
   .mask-img{
-  
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
@@ -44,29 +53,119 @@
     border: none;
   }
   
-  .image-placeholder {
-    color: #aaa;
-    font-size: 20px;
-  }
-  
-  .mask-img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-  }
-  
   .tools-section {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #f5f5f5;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    padding: 5px;
+    gap: 10px; 
   }
   
   .tools-section button {
-    display: block;
-    margin-bottom: 10px;
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid #eb710d; 
+    background-color: rgb(34, 34, 33); 
+    color: #ffffff; 
+    font-size: 46px;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 0 15px 9px rgb(235, 113, 13, 0.5);
+    margin-bottom: 20px;
   }
   
+
+  .toggle-button {
+    margin-bottom: 10px; 
+  }
+  */
+  /* MaskDrawing.css */
+/*.mask-drawing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mask-drawing-buttons {
+  margin-bottom: 20px;
+}
+
+.mask-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-mask {
+  background-color: #4CAF50; 
+  color: white;
+}
+
+.remove-mask {
+  background-color: #f44336; 
+  color: white;
+}
+
+.mask-button:hover {
+  opacity: 0.8;
+}
+
+.mask-drawing-image {
+  max-width: 80%;
+  height: auto;
+  border: 2px solid #ddd; 
+  border-radius: 4px;
+  padding: 5px;
+}
+*/
+
+/* src/components/DrawMask/Draw.css */
+.mask-drawing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mask-drawing-buttons {
+  margin-bottom: 10px;
+}
+
+.mask-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mask-button.remove-mask {
+  background-color: #dc3545;
+  
+}
+.img{
+  height: 10px;
+  width:100px
+}
+.mask-button:hover {
+  opacity: 0.8;
+}
+
+.actual-image {
+  max-width: 90vw;
+  max-height: 80vh;
+  border: 2px solid #dee2e6;
+  border-radius: 5px;
+}

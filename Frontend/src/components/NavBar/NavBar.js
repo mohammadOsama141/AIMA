@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../assets/images/A-of-aima.png';
-import '../App.css';
+import logo from '../../assets/images/A-of-aima.png';
+import './Nav.css';
 
 export default function NavBar() {
     const [scrolled, setScrolled] = useState(false);

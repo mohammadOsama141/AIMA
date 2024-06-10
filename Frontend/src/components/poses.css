@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    gap: 10px
+}
+
+.input-section, .result-section {
+    flex: 1;
+    margin: 5px;
+    border: 2pt solid white;
+    border-radius: 20px;
+}
+
+.loading {
+    text-align: center;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.result-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #ddd;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #fb5f0a; /* Bootstrap primary blue */
+    width: 0%; /* Initial width */
+    transition: width 0.6s ease;
+}
+.btn-gen{
+padding:  15px 20px;
+margin-top: 30px;
+margin-bottom: 50px;
+margin-left: 0;
+background-color:rgb(246, 87, 13);
+border: 2px  solid rgb(246, 87, 13);
+border-radius: 50px;
+color: #ffffff;
+font-size: x-large;
+font-family: "Afacad";
+transition: background-color 0.3s ease;
+}

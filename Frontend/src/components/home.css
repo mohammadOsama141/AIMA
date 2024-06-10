@@ -1,0 +1,240 @@
+html, body {
+  height: 100%; /* This ensures the html and body tag take up at least the full height of the viewport */
+  margin: 0;
+  padding: 0;
+  background: none; /* Make sure there's no background interfering from the html */
+}
+
+body {
+  position: relative;
+  background-image: url('C:\\Users\\PC\\OneDrive\\Desktop\\aima_stat\\night-before-fair\\aima-improved-react\\frontend\\public\\bg.JPG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: beige;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column; 
+}
+
+body::before {
+  content: '';
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.intro-section, .section1, .section2, .section3, .vdo-container {
+  position: relative;
+  z-index: 2;
+  width: 100%; 
+}
+
+.intro-section {
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+  text-align: left;
+  margin-top: 150px;
+  padding: 0 50px; 
+}
+.home-description-block {
+  flex: 1; 
+  margin-right: 30px;
+  max-width: 570px;
+}
+.section1{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding:30px;
+  margin-top: 50px;
+  background-color: rgba(27, 25, 25, 0.5);
+ 
+  
+}
+.sec1-deccription-block{
+  font-size: x-large;
+  font-family: "Afacad";
+  max-width: 100px;
+  margin-left: 50px;
+  padding-left: 20px;
+  color: white;
+
+}
+
+.section2{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding:30px;
+ 
+  background-color: rgba(0, 0, 0, 0.5);
+  
+}
+.sec2-deccription-block{
+  font-size: x-large;
+  font-family: "Afacad";
+  max-width: 550px;
+  margin-right: 40px;
+  padding-left: 20px;
+}
+
+.section3{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding:30px;
+  background-color: rgba(27, 25, 25, 0.5);
+  
+}
+.sec3-deccription-block{
+  font-size: x-large;
+  font-family: "Afacad";
+  max-width: 650px;
+  margin-left: 50px;
+  padding-left: 20px;
+}
+.btn-refine{
+  padding:  15px 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  margin-left: 0;
+  background-color:rgb(246, 87, 13);
+  border: 2px  solid rgb(246, 87, 13);
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: x-large;
+  font-family: "Afacad";
+  transition: background-color 0.3s ease; 
+}
+.btn-refine:hover{
+  background-color: rgb(31, 25, 21);
+  
+}
+.btn-turnaround{
+  padding: 15px 20px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  margin-left: 0;
+  background-color: rgb(246, 87, 13); 
+  border: 2px  solid rgb(246, 87, 13);
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: x-large;
+  font-family: "Afacad";
+  transition: background-color 0.3s ease; 
+}
+.btn-turnaround:hover{
+  background-color: rgb(31, 25, 21);
+  
+}
+.btn-customize{
+  padding: 15px 20px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  margin-left: 0;
+  background-color: rgb(246, 87, 13);
+  border: 2px  solid rgb(246, 87, 13);
+  border-radius: 40px;
+  color: #ffffff;
+  font-size: x-large;
+  font-family: "Afacad";
+  transition: background-color 0.3s ease; 
+}
+.btn-customize:hover{
+  background-color: rgb(31, 25, 21);
+  
+}
+
+@keyframes glow_vdo {
+  0%, 100% {
+      box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.0); /* No glow */
+      border-radius: 25px;
+  }
+  50% {
+      box-shadow: 0 0 20px rgba(252, 112, 5, 0.911); /* Bright glow */
+      border-radius: 25px;
+  }
+}
+
+.vdo-container {
+  flex: 1; /* Takes up the other half */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  
+}
+
+.demo-vdo-class {
+  width: 100%; /* Adjusts to the container size */
+  height: auto; /* Keeps the aspect ratio */
+  max-width: 700px; /* Maximum size */
+  border-radius: 25px;  
+  border: 1px solid #ffffff;
+  animation: glow_vdo 3s ease-in-out infinite; 
+}
+.intro-text {
+  margin-bottom: 20px; 
+  font-size: 1.25rem;
+}
+.try-aima-action-button {
+  position: relative;
+  overflow: hidden; 
+  display: inline-block;
+  border: 2px solid #fff;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease;
+  animation: glow_vdo 3s ease-in-out infinite; 
+  background-color: rgb(26, 24, 24);
+}
+
+
+.try-aima-action-button:hover {
+  background-color: #0e0d0dec;
+  text-decoration: none; 
+  color: rgb(255, 255, 255);
+}
+
+@keyframes sparkles {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.card {
+  height: 320px;
+  width: 320px;
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+  text-align: center;
+ 
+
+
+}
+.card img{
+  height: 320px;
+  width: 320px;
+  border-radius: 25px;
+
+}

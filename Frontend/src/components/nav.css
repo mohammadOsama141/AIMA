@@ -1,0 +1,85 @@
+/* src/components/NavbarComponent.css */
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Luckiest+Guy&display=swap');
+
+.navbar-custom {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    z-index: 1000;
+    transition: background-color 0.3s, backdrop-filter 0.3s; 
+    
+}
+
+.navbar.scrolled {
+    background-color:rgba(15, 15, 15, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .navbar-custom .nav-link {
+    background-color: black;
+    border: none;
+    margin-right: 10px;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 15px; /* Add padding to match button-like appearance */
+    display: inline-block; /* Allows padding and margin to work */
+    text-decoration: none; /* Removes underline from links */
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link:focus, 
+.navbar-custom .nav-link:active {
+    color: rgb(159, 155, 155);
+    background-color: rgb(43, 41, 41);
+    border-color: black;
+    outline: none; /* Removes default focus outline */
+}
+
+.nav-link:last-child {
+    margin-right: 0;
+}
+
+.navbar-brand-custom {
+    color: bisque; 
+    font-size: x-large;
+    font-weight: bold;
+    padding-bottom: 0;
+    
+}
+
+.navbar-custom .navbar-brand-custom:hover, 
+.navbar-custom .navbar-brand-custom:focus, 
+.navbar-custom .navbar-brand-custom:active {
+    color: white;
+}
+
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.0); /* No glow */
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(252, 112, 5, 0.911); /* Bright glow */
+    }
+}
+
+.navbar-brand-custom img {
+    margin-right: 15px;
+    height: 40px;
+    width: 40px;
+    padding-bottom: 10px;
+    
+    position: relative;
+    overflow: visible; /* Allows the glow effect to be visible around the borders */
+    
+}
+
+.navbar-brand-custom span {
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: "Afacad";
+  }
+  

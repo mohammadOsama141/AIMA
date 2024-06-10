@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/frontend/node_modules
+/node_modules
 /.pnp
 .pnp.js
 
@@ -21,18 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# static and public files
-/frontend/public
-/backend/static
-
-# ML models
-/backend/app/models
-
-# assets, (images etc)
-/Frontend/src/assets/images/
-/Backend/app/uploaded_images/
-/Backend/app/masked_images/
-
-#cache
-/Backend/app/__pycache__/

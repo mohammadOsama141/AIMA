@@ -1,96 +1,182 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse, FileResponse
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from fastapi.responses import JSONResponse
 import numpy as np
 import cv2
-from PIL import Image
+import os
+from fastapi.middleware.cors import CORSMiddleware
 import shutil
-from pathlib import Path
-from datetime import datetime
+from pydantic import BaseModel, validator
+import time
+from .functions import poseGen, inpaint, refine
+import traceback
+import base64
+import uuid
+import logging
 
+# for api to frontend communication
 app = FastAPI()
-
-# CORS middleware setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Directory setup for uploaded and processed images
-UPLOAD_DIR = Path("uploaded_images")
-PROCESS_DIR = Path("masked_images")
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-PROCESS_DIR.mkdir(parents=True, exist_ok=True)
+# a dir to hold the uploaded images by user
+UPLOAD_DIRECTORY = "static/uploads"
+os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-app.mount("/uploaded_images", StaticFiles(directory="uploaded_images"), name="uploaded_images")
-app.mount("/masked_images", StaticFiles(directory="masked_images"), name="masked_images")
+
+class Point(BaseModel):
+    x: float
+    y: float
+    action: str
+
+    @validator('x', 'y', pre=True)
+    def convert_float_to_int(cls, v):
+        return int(round(v))
 
 
 class DrawRequest(BaseModel):
-    filename: str
-    point: dict
-    action: str
+    points: list[Point]
+    image_path: str
 
 
-@app.post("/upload_image/")
-async def upload_image(image: UploadFile = File(...)):
-    file_path = UPLOAD_DIR / image.filename
-    with file_path.open("wb") as buffer:
-        shutil.copyfileobj(image.file, buffer)
-    url = f"http://localhost:8000/uploaded_images/{image.filename}"
-    return {"url": url}
+# end point -> for uploading image
+@app.post("/upload-image")
+async def upload_image(file: UploadFile = File(...)):
+    try:
+        file_location = os.path.join(UPLOAD_DIRECTORY, f"{file.filename}")
+        with open(file_location, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        # Resize the image to 512x512
+        img = cv2.imread(file_location)
+        resized_img = cv2.resize(img, (512, 512))
+        cv2.imwrite(file_location, resized_img)  
+        accessible_path = f"/static/uploads/{file.filename}"
+        return {"filename": accessible_path}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to upload and resize image: {str(e)}")
 
 
-@app.post("/draw_mask")
-async def draw_mask(request: DrawRequest):
-    # Load the specific uploaded image
-    file_path = UPLOAD_DIR / request.filename
-    print("file name: ", file_path, "\n")
-    if not file_path.exists():
-        raise HTTPException(status_code=404, detail="Image not found")
+# end point to process the selected coordinates by brush
+@app.post("/process-points")
+async def process_points(request: DrawRequest):
+    image_path = request.image_path.strip('/')
+    full_image_path = os.path.join("static", image_path.lstrip("/static/"))
+    orig_img = cv2.imread(full_image_path)
+    if orig_img is None:
+        raise HTTPException(status_code=404, detail="Original image not found")
 
-    raw_image = Image.open(file_path).convert("RGB")
-    orig_img = np.array(raw_image)
-    mask = np.zeros(orig_img.shape[:2], dtype=np.uint8)  # Initialize mask
+    # Create a mask of the same size as the resized image
+    mask = np.zeros((512, 512), dtype=np.uint8)  # Ensure mask size is 512x512
+    for point in request.points:
+        x, y = int(round(point.x)), int(round(point.y))
+        color = 255 if point.action == 'add' else 0
+        cv2.circle(mask, (x, y), 10, color, -1)
 
-    # Update mask based on the request
-    point = request.point
-    action = request.action  # 'add' or 'remove'
-    brush_size = 10  # Brush size
+    mask_color = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
+    final_img = cv2.addWeighted(orig_img, 0.7, mask_color, 0.3, 0)
 
-    if action == 'add':
-        cv2.circle(mask, (int(point['x']), int(point['y'])), brush_size, 1, -1)
-    elif action == 'remove':
-        cv2.circle(mask, (int(point['x']), int(point['y'])), brush_size, 0, -1)
+    result_path = os.path.join(UPLOAD_DIRECTORY, "result.png")
+    mask_path = os.path.join(UPLOAD_DIRECTORY, "mask.png")
+    cv2.imwrite(result_path, final_img)
+    cv2.imwrite(mask_path, mask)  # Save the mask image separately
 
-    kernel = cv2.getStructuringElement(
-        cv2.MORPH_ELLIPSE, (brush_size, brush_size))
-    mask_dilated = cv2.dilate(mask, kernel)
+    timestamp = int(time.time() * 1000)
+    result_accessible_path = f"/static/uploads/result.png?{timestamp}"
+    mask_accessible_path = f"/static/uploads/mask.png?{timestamp}"
 
-    # Apply mask to image
-    mask_img = np.stack([mask_dilated * 255] * 3, axis=-1)
-    final_img = cv2.addWeighted(orig_img, 1, mask_img, 0.5, 0)
-    final_img = cv2.cvtColor(final_img, cv2.COLOR_BGR2RGB)
+    return {"image_path": result_accessible_path, "mask_path": mask_accessible_path}
 
-    # Save the combined image
-    result_path = PROCESS_DIR / f"result_{request.filename}"
-    cv2.imwrite(str(result_path), final_img)
 
-    # Optionally, save the mask image
-    mask_path = PROCESS_DIR / f"mask_{request.filename}"
-    cv2.imwrite(str(mask_path), mask_dilated * 255)  # Save mask as a b&w image
-    print("backed path:",  f"/masked_images/{result_path.name}")
-    timestamp = datetime.now().strftime('%Y%m%d%H%M%S%f')
+# end point -> that calls for charcter customization 
+class TextPrompt(BaseModel):
+    text_prompt: str
+    input_img_path: str
 
-    return JSONResponse(content={
-        'image_path': f"/masked_images/{result_path.name}?{timestamp}",
-        'mask_path': f"/masked_images/{mask_path.name}?{timestamp}"
-    })
+
+@app.post("/customize-image")
+async def customize_image(text_prompt: TextPrompt):
+    try:
+        # Convert web path to filesystem path
+        base_dir = "static/uploads"  # Ensure this is correct as per your server configuration
+        input_image_filename = text_prompt.input_img_path.split('/')[-1]  # Extract filename
+        full_input_img_path = os.path.join(base_dir, input_image_filename)
+        mask_path = os.path.join(base_dir, 'mask.png')  # Assume mask.png is also in the same directory
+        
+        # Call the inpaint function
+        customized_img = inpaint(text_prompt.text_prompt, full_input_img_path, mask_path)
+        
+        # Assume inpaint returns a filename, not a path
+        return {"customized_image": f"{customized_img}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+class PosePrompt(BaseModel):
+    text_prompt: str
+    art_style: str
+
+    
+@app.post("/generate-poses")
+async def generate_poses(prompt: PosePrompt):
+    try:
+        image_path = poseGen(prompt.art_style, prompt.text_prompt)
+        return {"sheet_path": image_path}
+    except Exception as e:
+        # Log the full traceback and error message
+        traceback.print_exc()
+        return JSONResponse(status_code=500, content={"message": str(e)})
+    
+
+
+class ImageData(BaseModel):
+    refine_text_prompt: str
+    image_data: str  # This is expected to be a Base64 encoded string
+
+def get_file_extension(content_type: str) -> str:
+    """ Get the file extension based on the content type. """
+    if 'image/jpeg' in content_type or 'image/jpg' in content_type:
+        return '.jpg'
+    elif 'image/png' in content_type:
+        return '.png'
+    else:
+        raise HTTPException(status_code=400, detail="Unsupported file type")
+
+@app.post("/refine-character")
+async def refine_character(data: ImageData):
+    try:
+        # Decode the base64 string
+        header, encoded = data.image_data.split(',', 1)
+        img_bytes = base64.b64decode(encoded)
+        file_extension = get_file_extension(header)
+
+        # Generate a unique filename
+        unique_filename = f"{uuid.uuid4()}{file_extension}"
+        file_path = os.path.join('static/uploads', unique_filename)
+
+        # Write the image data to a file
+        with open(file_path, 'wb') as f:
+            f.write(img_bytes)
+
+        # Call the refine function (assuming it's implemented elsewhere in your code)
+        output_path = refine(data.refine_text_prompt, file_path)
+        return JSONResponse(content={"message": "File refined successfully", "path": output_path})
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/download-file")
+async def download_file():
+    file_path = "path_to_file"
+    if not os.path.exists(file_path):
+        logging.error("File not found: " + file_path)
+        raise HTTPException(status_code=404, detail="File not found")
+    return  JSONResponse(file_path)
 
 
 if __name__ == "__main__":

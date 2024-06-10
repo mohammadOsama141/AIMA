@@ -1,0 +1,45 @@
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.triangle-container {
+    position: fixed; /* or 'absolute' depending on other content */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; /* Width of the triangle layout */
+    height: 100px; /* Height of the triangle layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo-position {
+    position: absolute;
+    width: 60px; /* Width of each logo */
+    height: 60px; /* Height of each logo */
+    animation: rotate 2s linear infinite;
+}
+
+.logo-top {
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.logo-bottom-left {
+    bottom: 0;
+    left: 0;
+    transform: translateY(50%);
+}
+
+.logo-bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: translateY(50%);
+}

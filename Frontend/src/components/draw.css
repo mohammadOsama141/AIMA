@@ -1,0 +1,120 @@
+body {
+    position: relative;
+    background-image: url('C:\\Users\\PC\\OneDrive\\Desktop\\aima_stat\\night-before-fair\\aima-improved-react\\frontend\\public\\bg.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: beige;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column; 
+    padding-top: 100px;
+  }
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px; /* Reduced padding */
+    margin: 20px; /* Center align the wrapper */
+    gap: 30px; 
+    max-width: 1000px; 
+}
+.input-img-container, .mask-img-container {
+    border: 4px solid #ffffff;
+    max-width: 512px; 
+    width: 100%; 
+    height: 600px;
+    padding: 20px 20px;
+    box-shadow: 0 0 15px 9px #e65100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    
+}
+.upload-image-class {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 50px;
+    margin-top: auto;
+    margin-left: 20px;
+   
+    
+}
+
+.input-img-container canvas{
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    max-width: 512px;
+    max-height: 512px;
+    
+}
+.mask-img-container canvas {
+    margin-top: 20px;
+    width: 100%;
+    height: 512px; 
+    max-width: 512px;
+    border: 2pt solid white;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+  
+}
+
+.action-buttons { 
+    background-color: rgb(0, 0, 0,1); /* Orange button background */
+    color: #fbfbfb; /* White text color */
+    padding: 10px 20px;
+    align-items: left;
+    gap:20px;
+    cursor: pointer; 
+    border-radius: 20px;
+    transition: background-color 0.7s ease; 
+    font-size: xx-large;
+    font-weight: bolder;
+    box-shadow: 0 0 15px 9px #131313; 
+}
+.action-buttons:hover {
+    background-color: #3d3a38; 
+    cursor: pointer; 
+}
+
+
+.tool-section {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+
+
+.continue-customize-class{
+    padding: 10px 20px;
+    margin-top: auto;
+    margin-bottom: 60px;
+    margin-left: 0;
+    background-color: transparent;
+    border: 2px  solid rgb(255, 255, 255);
+    
+    color: #ffffff;
+    font-size: x-large;
+    font-family: "Afacad";
+    
+}
+.continue-customize-class button:hover{
+    background-color: rgb(15, 15, 15) ;
+    transition: background-color 0.3s ease; ;
+}
+
+.bi.bi-download{
+margin-top: 300px;
+}
+
